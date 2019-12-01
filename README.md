@@ -5,7 +5,7 @@ Multiprocessing using a pool of workers in Node.js.
 This project aims to offer a Node module that makes it easy to use a pool of workers for multiprocessing.
 
 ### Prerequisites
-- This project has been tested with Node.js v12.13.1 LTS.
+- This project has been tested with Node.js 12.13.1 LTS.
 - No external npm modules are used.
 
 ### Authors
@@ -15,4 +15,4 @@ This project aims to offer a Node module that makes it easy to use a pool of wor
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ### Acknowledgments
-* The inspiration for this project came from https://docs.python.org/3.7/library/multiprocessing.html#using-a-pool-of-workers
+* The inspiration for this project came from [Pool.apply_async() method in Python](https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.pool.Pool.apply_async)
