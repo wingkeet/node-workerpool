@@ -2,11 +2,11 @@
 
 const WorkerPool = require('./workerpool')
 
-function callback(result) {
+async function callback(result) {
     console.log('callback:', result)
 }
 
-function errcallback(result) {
+async function errcallback(result) {
     console.error('errcallback:', result)
 }
 

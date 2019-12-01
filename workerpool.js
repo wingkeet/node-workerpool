@@ -47,13 +47,13 @@ class WorkerPool {
                 let recvIndex = sendIndex
                 const worker = this._workers[sendIndex]
                 worker.removeAllListeners('message')
-                worker.on('message', (result) => {
+                worker.on('message', async (result) => {
                     // Receive result from worker
                     result.index = recvIndex
                     result.task = tasks[recvIndex]
                     result.wpid = worker.pid
-                    if (callback && result.ok) callback(result)
-                    if (errcallback && !result.ok) errcallback(result)
+                    if (callback && result.ok) await callback(result)
+                    if (errcallback && !result.ok) await errcallback(result)
                     results[recvIndex] = result
                     done++
                     if (done === numtasks) {
