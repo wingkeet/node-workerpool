@@ -4,20 +4,21 @@ async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
+async function busy(secs) {
+    const ms = secs * 1000
+    let count = 0
+    const t0 = new Date()
+    while (new Date() - t0 < ms) {
+        count++
+        if (count % 500000 === 0) await sleep(30) // simulate some I/O
+    }
+}
+
 async function doWork(task) {
     const secs = task
     if (secs % 2) throw new Error('Odd number')
-    const ms = secs * 1000
-    let iterations = 0
-    let sum = 0
-    const t0 = new Date()
-    while (new Date() - t0 < ms) {
-        sum += Math.random()
-        iterations++
-        if (iterations % 500000 === 0) await sleep(30)
-    }
-    const avg = sum / iterations
-    return avg
+    await busy(secs)
+    return secs * 2
 }
 
 process.on('message', async (task) => {

@@ -23,9 +23,7 @@ class WorkerPool {
     }
 
     close() {
-        for (const worker of this._workers) {
-            worker.disconnect()
-        }
+        this._workers.forEach(worker => worker.disconnect())
     }
 
     pids() {
