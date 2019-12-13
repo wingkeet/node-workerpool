@@ -15,4 +15,4 @@ This project aims to offer a Node module that makes it easy to use a pool of wor
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ### Acknowledgments
-* The inspiration for this project came from the Python [Pool.apply_async()] method (https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.pool.Pool.apply_async).
+* The inspiration for this project came from the Python [Pool.apply_async()](https://docs.python.org/3.7/library/multiprocessing.html#multiprocessing.pool.Pool.apply_async) method.
