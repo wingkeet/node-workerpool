@@ -33,7 +33,7 @@ class WorkerPool {
     async run(tasks, {callback, errcallback} = {}) {
         return new Promise((resolve, reject) => {
             const numtasks = tasks.length
-            if (numtasks === 0) reject(new Error('Number of tasks must not be zero'))
+            if (numtasks === 0) { reject(new Error('Number of tasks must not be zero')); return; }
             const initialBatchSize = Math.min(numtasks, this._poolSize)
             let done = 0
             let sendIndex = 0
