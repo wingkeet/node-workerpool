@@ -46,7 +46,7 @@ class WorkerPool {
                 const worker = this._workers[sendIndex]
                 worker.removeAllListeners('message')
                 worker.on('message', async (result) => {
-                    // Receive result from worker
+                    // Received result from worker
                     result.index = recvIndex
                     result.task = tasks[recvIndex]
                     result.wpid = worker.pid
