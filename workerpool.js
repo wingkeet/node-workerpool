@@ -3,7 +3,6 @@
 const cp = require('child_process')
 const os = require('os')
 const path = require('path')
-const util = require('util')
 
 class WorkerPool {
     _workers = []
@@ -14,7 +13,7 @@ class WorkerPool {
 
     _init() {
         for (let i = 0; i < this._poolSize; i++) {
-            const worker = cp.fork(path.join(__dirname, 'worker'))
+            const worker = cp.fork(path.join(__dirname, 'worker.js'))
             this._workers.push(worker)
 
             worker.on('exit', (code, signal) => {
