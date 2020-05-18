@@ -7,8 +7,8 @@ function sleep(ms) {
 async function busy(secs) {
     const ms = secs * 1000
     let count = 0
-    const t0 = new Date()
-    while (new Date() - t0 < ms) {
+    const t0 = Date.now()
+    while (Date.now() - t0 < ms) {
         count++
         if (count % 500000 === 0) await sleep(30) // simulate some I/O
     }
