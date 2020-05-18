@@ -42,6 +42,7 @@ class WorkerPool {
 
             // Each iteration through a loop has a separate Lexical Environment.
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+            // https://stackoverflow.com/questions/750486/javascript-closure-inside-loops-simple-practical-example
             while (sendIndex < initialBatchSize) {
                 let recvIndex = sendIndex
                 const worker = this._workers[sendIndex]
