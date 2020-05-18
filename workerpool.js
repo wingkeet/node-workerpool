@@ -40,8 +40,8 @@ class WorkerPool {
             const messageCallbacks = []
             const results = []
 
-            // For a loop, every iteration has a separate Lexical Environment.
-            // https://javascript.info/closure#code-blocks-and-loops-iife
+            // Each iteration through a loop has a separate Lexical Environment.
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
             while (sendIndex < initialBatchSize) {
                 let recvIndex = sendIndex
                 const worker = this._workers[sendIndex]

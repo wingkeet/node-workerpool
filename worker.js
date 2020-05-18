@@ -24,7 +24,7 @@ async function doWork(task) {
 process.on('message', async (task) => {
     console.debug(`worker ${process.pid}: ${task}`)
 
-    const t0 = new Date()
+    const t0 = Date.now()
     const result = {}
     try {
         result.ok = 1
@@ -34,7 +34,7 @@ process.on('message', async (task) => {
         result.ok = 0
         result.errmsg = err.message
     }
-    result.tookms = new Date() - t0
+    result.tookms = Date.now() - t0
     process.send(result)
 })
 
