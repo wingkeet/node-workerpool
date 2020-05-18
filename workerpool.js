@@ -38,6 +38,7 @@ class WorkerPool {
             const initialBatchSize = Math.min(numtasks, this._poolSize)
             let done = 0
             let sendIndex = 0
+            const messageCallbacks = []
             const results = []
 
             // For a loop, every iteration has a separate Lexical Environment.
@@ -46,7 +47,7 @@ class WorkerPool {
                 let recvIndex = sendIndex
                 const worker = this._workers[sendIndex]
 
-                worker.on('message', (result) => {
+                const messageCallback = (result) => {
                     // Received result from worker
                     result.index = recvIndex
                     result.task = tasks[recvIndex]
@@ -55,14 +56,18 @@ class WorkerPool {
                     if (errcallback && !result.ok) errcallback(result)
                     results[recvIndex] = result
                     if (++done === numtasks) {
-                        this._workers.forEach(worker => worker.removeAllListeners('message'))
+                        for (let i = 0; i < initialBatchSize; i++) {
+                            this._workers[i].off('message', messageCallbacks[i])
+                        }
                         resolve(results)
                     }
                     else if (sendIndex < numtasks) {
                         recvIndex = sendIndex
                         worker.send(tasks[sendIndex++])
                     }
-                })
+                }
+                worker.on('message', messageCallback)
+                messageCallbacks.push(messageCallback)
 
                 // Send one task to each worker
                 worker.send(tasks[sendIndex++])

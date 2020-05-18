@@ -17,18 +17,29 @@ async function main() {
 
     try {
         let results
+        let t0
+
+        console.log('-'.repeat(70))
 
         // First set of tasks
-        const tasks1 = [8, 2, 3, 12, 6, 4]
+        t0 = Date.now()
+        const tasks1 = [8, 2, 3, 8, 6, 4]
         console.log('tasks1 =', tasks1)
         results = await pool.run(tasks1, {callback, errcallback})
         console.log('results:', results)
+        console.log(`took ${Date.now() - t0} ms`)
+
+        console.log('-'.repeat(70))
 
         // Second set of tasks
-        const tasks2 = [6, 4, 2, 8]
+        t0 = Date.now()
+        const tasks2 = [6, 10]
         console.log('tasks2 =', tasks2)
         results = await pool.run(tasks2)
         console.log('results:', results)
+        console.log(`took ${Date.now() - t0} ms`)
+
+        console.log('-'.repeat(70))
     }
     catch (err) {
         console.error('Error:', err.message)
