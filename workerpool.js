@@ -3,6 +3,7 @@
 const cp = require('child_process')
 const os = require('os')
 const path = require('path')
+const util = require('util')
 
 class WorkerPool {
     _workers = []
@@ -30,7 +31,7 @@ class WorkerPool {
         return this._workers.map(worker => worker.pid)
     }
 
-    async run(tasks, {callback, errcallback} = {}) {
+    run(tasks, {callback, errcallback} = {}) {
         return new Promise((resolve, reject) => {
             const numtasks = tasks.length
             if (numtasks === 0) { reject(new Error('Number of tasks must not be zero')); return; }
@@ -44,17 +45,17 @@ class WorkerPool {
             while (sendIndex < initialBatchSize) {
                 let recvIndex = sendIndex
                 const worker = this._workers[sendIndex]
-                worker.removeAllListeners('message')
-                worker.on('message', async (result) => {
+
+                worker.on('message', (result) => {
                     // Received result from worker
                     result.index = recvIndex
                     result.task = tasks[recvIndex]
                     result.wpid = worker.pid
-                    if (callback && result.ok) await callback(result)
-                    if (errcallback && !result.ok) await errcallback(result)
+                    if (callback && result.ok) callback(result)
+                    if (errcallback && !result.ok) errcallback(result)
                     results[recvIndex] = result
-                    done++
-                    if (done === numtasks) {
+                    if (++done === numtasks) {
+                        this._workers.forEach(worker => worker.removeAllListeners('message'))
                         resolve(results)
                     }
                     else if (sendIndex < numtasks) {
