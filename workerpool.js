@@ -52,8 +52,8 @@ class WorkerPool {
                     result.index = recvIndex
                     result.task = tasks[recvIndex]
                     result.wpid = worker.pid
-                    if (callback && result.ok) callback(result)
-                    if (errcallback && !result.ok) errcallback(result)
+                    if (callback && result.ok) setImmediate(callback, result)
+                    if (errcallback && !result.ok) setImmediate(errcallback, result)
                     results[recvIndex] = result
                     if (++done === numtasks) {
                         for (let i = 0; i < initialBatchSize; i++) {
