@@ -1,0 +1,17 @@
+{
+  "name": "node-workerpool",
+  "version": "1.0.0",
+  "description": "Multiprocessing using a pool of workers in Node.js",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "keywords": [],
+  "author": "wingkeet",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wingkeet/node-workerpool.git"
+  }
+}
