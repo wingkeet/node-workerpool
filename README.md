@@ -5,7 +5,7 @@ Multiprocessing using a pool of workers in Node.js.
 This project aims to offer a Node module that makes it easy to use a pool of workers for multiprocessing.
 
 ### Prerequisites
-- The file workerpool.js requires Node.js >= 12.0.0 due to usage of private instance fields from ES2019.
+- The file workerpool.js requires Node.js >= 12.0.0 due to usage of private class fields from ES2019.
 - No external npm modules are used.
 
 ### Authors
