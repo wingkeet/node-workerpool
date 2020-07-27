@@ -8,6 +8,9 @@ This project aims to offer a Node module that makes it easy to use a pool of wor
 - The file workerpool.js requires Node.js >= 12.0.0 due to usage of private class fields from ES2019.
 - No external npm modules are used.
 
+### Deprecation
+This project has been superseded by the [taskman](https://github.com/wingkeet/taskman) project.
+
 ### Authors
 * **Steve Leong** - *Initial work*
 
